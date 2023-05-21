@@ -160,3 +160,62 @@ insert into grupa (naziv, smjer) values ('S1', 4), ('S2', 4);
 -- a polaznike pod broj 26,27,28 jer polaznik počinje sa šifrom 1, a u osobi se nalazi pod šifrom 2, te zato ide broj manje
 insert into clan (grupa, polaznik) values
 (4,26),(4,27),(4,28);
+
+
+
+-- PROMJENA PODATAKA
+
+--select * from smjer;
+
+-- ne izvoditi update bez where dijela update naredbe
+
+-- naredba za DBeaver je: select * from smjer; 
+
+update smjer set naziv='Java programiranje'
+where sifra=1;
+
+-- web programiranje cijena je 1000 eur i upisnina 50 eur
+update smjer set 
+cijena=1000,
+upisnina=50
+where sifra=2;
+
+-- svim smjerovima smanji cijenu za 10%
+update smjer set cijena=cijena*0.9;
+
+-- uvećaj cijenu svim smjerovima za 10 eur
+update smjer set cijena=cijena+10;
+
+-- VJEŽBA
+-- select * from osoba;
+-- Kristi se odluči rastati želi 
+-- vratiti svoje prezime Novoselić
+-- PROVEDITE TO
+
+-- VJEŽBA RJEŠENJE:
+-- select * from osoba;
+
+--update osoba set prezime='Novoselić'
+--where sifra=5;
+
+-- šifra je 5 jer se nalazi u osoba, da se nalazi u polaznik bila bi šifra 4
+
+
+
+-- vanjski ključ 55 ne postoji kao primarni ključ 55 u tablici smjer
+-- update grupa set smjer=55 where sifra=1;
+
+
+-- BRISANJE PODATAKA
+
+-- DELETE naredbe su u komentarima da nam ne pobrišu podatke, koristimo ovaj tip umjesto kaskade (cascade |) jer je sigurnije
+-- delete from clan where grupa=1;
+-- delete from grupa where smjer=1;
+-- delete from smjer where sifra=1;
+
+-- DELETE naredbe smo pisali od dna prema gore, prva naredba je bila zadnja (delete from smjer where sifra=1;),
+-- izbacilo je sintaksu da ne možemo dok ne obrišemo prvo grupu zbog FK, pa smo išli to, opet ista stvar dok ne obrišemo clan zbog FK,
+-- tek onda je prihvatilo pa smo išli redom, prvo proveli naredbu od gore prema dolje i obrisali
+
+-- sve ovo u komentarima je uspješno testirano i provedeno kroz DBeaver
+
