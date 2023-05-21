@@ -144,3 +144,19 @@ insert into clan (grupa, polaznik) values
 -- Domaća zadaća:
 -- U sve baze koje ste kreirali na osnovu zadatka ERA osnovno unijeti u svaku tablicu po 3 - 5 redova
 
+
+
+-- vježbanje 1. zadatak: 4 jer će biti šifra 4 u smjeru
+insert into smjer (naziv) values ('Serviser');
+
+-- vježbanje 2. zadatak: dodali smo dvije grupe, S1 je pod šifrom 3, a S2 pod šifrom 4 u ovom slučaju,
+-- unijeli smo za prvu grupu (Java programiranje) smjer JP28 koji je pod šifrom 1,
+-- unijeli smo za drugu grupu (Web programiranje) smjer WP1 koji je pod šifrom 2,
+-- za treću grupu (PHP programiranje) nismo unosili išta, tako da je nastavak šifra 3 pod koju spada S1 i šifra 4 pod koju spada S2
+insert into grupa (naziv, smjer) values ('S1', 4), ('S2', 4);
+
+-- vježbanje 3. zadatak: morali smo prvo dodati 3 nove osobe, zatim dodati u polaznike (osoba) values (27,28,29),
+--tek onda ovu naredbu unijeti i izvršiti, a u values smo stavili 4 jer je grupa pod šifrom broj 4,
+-- a polaznike pod broj 26,27,28 jer polaznik počinje sa šifrom 1, a u osobi se nalazi pod šifrom 2, te zato ide broj manje
+insert into clan (grupa, polaznik) values
+(4,26),(4,27),(4,28);
