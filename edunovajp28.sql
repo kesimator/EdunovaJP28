@@ -1,4 +1,4 @@
-
+# d:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < D:\EDUNOVA_vjezbe\edunovajp28.sql
 
 drop database if exists edunovajp28;
 create database edunovajp28;
