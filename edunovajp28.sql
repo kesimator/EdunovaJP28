@@ -52,6 +52,9 @@ create table clan(
     foreign key (polaznik) references polaznik(sifra)
 );
 
+-- alter table clan add foreign key (polaznik) references polaznik(sfira);
+-- ovo je još jedan način unosa FK, u ovom slučaju ne treba paziti na raspored tablica
+
 
 
 -- najlošija verzija insert naredbe
