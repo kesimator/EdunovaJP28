@@ -253,9 +253,9 @@ select naziv as smjer, 'Osijek' as grad from smjer;
 # 4. izraz
 
 select naziv, now() as datum from smjer;
+# select naziv, now() as datum, 2 as velicina, 66.22 as cijena from smjer;
 
 # ispišite imena i prezimena osoba
-
 select ime, prezime from osoba;
 
 # filtriranje redova
@@ -269,7 +269,7 @@ select * from osoba where sifra=1;
 select * from osoba where sifra>=10;
 
 # 2. logički operatori - bool-ovi operatori
-# and or not 
+# and or not     -> https://i.ytimg.com/vi/7dvqfpXEjdg/maxresdefault.jpg
 
 select * from osoba where sifra>1 and sifra <3;
 
@@ -304,7 +304,7 @@ select * from osoba where sifra>=3 and sifra<=5;
 
 select * from osoba where sifra between 3 and 5;
 
-# operator int - upogoni logički or
+# operator in - upogoni logički or
 select * from osoba where sifra=2 or sifra=6 or sifra=9;
 
 select * from osoba where sifra in (2,6,9);
@@ -330,4 +330,16 @@ insert into osoba(ime, prezime) values ('Shaquille', 'O\'Neal');
 insert into osoba(ime, prezime) values ("Shaquille", "O'Neal");
 
 select * from osoba where ime like 'S%';
+
+# novije verzije baza dozvoljavaju "
+# insert into osoba (ime,prezime)
+# values ("Shaquille","O'Neal");
+
+# select * from osoba where ime like 'S%';
+
+# sve verzije baza
+# insert into osoba (ime,prezime)
+# values ('Shaquille','O\'Neal');
+
+
 
