@@ -121,3 +121,7 @@ order by b.hlace desc;
 
 -- Trebalo je 1h26m
 
+-- 1. zadatak me zbunio. 1. U tablice muskarac, zena i sestra_svekar unesite po 3 retka
+-- Kada sam izradio sve tablice i krenuo čitati zadatke, pomislio sam da nisam trebao sve atribute unositi,
+-- već samo po 3 atributa pa sam ostavio sve kada je već bilo izrađeno, da bih tek u 2. vježbi shvatio
+-- da se 1. zadatak zapravo odnosi na unos vrijednosti.
