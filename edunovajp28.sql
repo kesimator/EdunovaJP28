@@ -1,4 +1,4 @@
-# d:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < D:\EDUNOVA_vjezbe\edunovajp28.sql
+# d:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < 
 
 drop database if exists edunovajp28;
 create database edunovajp28;
@@ -103,7 +103,10 @@ values
 (null, 'Goran','Franjić', null, 'goran@proces.hr'),
 (null, 'Marko','Ivanović', null, 'markoivanovic19@gmail.com'),
 (null, 'Emina','Vejsilović', null, 'emiomiemi@gmail.com'),
-(null, 'Ana','Jurić', null, 'ana.juric19@gmail.com');
+(null, 'Ana','Jurić', null, 'ana.juric19@gmail.com'),
+(null, 'Michael','Schumacher', null, null),
+(null, 'Mika','Hakkinen', null, null),
+(null, 'Sebastian','Vettel', null, null);
 
 
 
@@ -114,7 +117,7 @@ insert into predavac (osoba) values (1);
 insert into polaznik (osoba) values
 (2),(3),(4),(5),(6),(7),(8),(9),(10),
 (11),(12),(13),(14),(15),(16),(17),(18),(19),(20),
-(21),(22),(23),(24),(25),(26);
+(21),(22),(23),(24),(25),(26),(27),(28),(29);
 
 
 

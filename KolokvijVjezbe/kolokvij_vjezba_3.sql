@@ -1,4 +1,4 @@
-# d:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < 
+# d:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < D:\GitHubJP28\java\EdunovaJP28\KolokvijVjezbe\kolokvij_vjezba_3.sql
 
 drop database if exists kolokvij_vjezba_3;
 create database kolokvij_vjezba_3;
@@ -163,7 +163,7 @@ values(3, 0, 553.93, 73.52, null, 3);
 -- inner join prijatelj d 			on d.sifra =c.prijatelj 
 -- inner join prijatelj_brat e 	on d.sifra =e.prijatelj 
 -- inner join brat f 				on f.sifra =e.brat 
--- where c.lipa <>91 and d.haljina like '%b%a%'
+-- where c.lipa <>91 and d.haljina like '%ba%'
 -- order by b.kuna desc;
 
 -- Gotovo za 52m
