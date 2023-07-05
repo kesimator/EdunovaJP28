@@ -1,0 +1,16 @@
+package edunova;
+
+public class E03Rekurzija {
+	
+	public static void main(String[] args) {
+		
+		metoda();
+		
+	}
+
+	private static void metoda() {
+		metoda();
+		
+	}
+
+}

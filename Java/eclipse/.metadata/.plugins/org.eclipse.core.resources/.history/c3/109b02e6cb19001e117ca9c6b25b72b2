@@ -1,0 +1,15 @@
+package edunova;
+
+public class Grad {
+	
+	private String grad;
+	
+	private int stanovnika;
+	
+	private boolean crkvaKatolicka;
+	
+	private char energetskiCertifikat;
+	
+	private double bdp;
+
+}

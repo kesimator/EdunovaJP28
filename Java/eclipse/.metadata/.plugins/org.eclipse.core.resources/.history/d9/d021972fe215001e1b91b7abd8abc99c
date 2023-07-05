@@ -1,0 +1,11 @@
+package edunova;
+
+public class E04KM {
+	
+	public static void main(String[] args) {
+		
+		
+		System.out.println(Pomocno.ucitajbroj("Unesi cijeli broj", "Nisi unio broj"));
+	}
+
+}

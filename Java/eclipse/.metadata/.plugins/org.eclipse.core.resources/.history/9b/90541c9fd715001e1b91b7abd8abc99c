@@ -1,0 +1,15 @@
+package edunova;
+
+public class E01Metode {
+	
+	public static void main(String[] args) {
+		
+	}
+	
+	// 1. tipa void, ne prima parametre
+	// za sada moramo
+	/* bez navođenja načina pristupa */static void tip1() { // bez navođenja načina pristupa
+		System.out.println("Hello tip 1");
+	}
+
+}

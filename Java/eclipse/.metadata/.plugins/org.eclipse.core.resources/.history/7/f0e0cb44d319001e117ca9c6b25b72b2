@@ -1,0 +1,13 @@
+package edunova;
+
+public class Racunalo {
+	
+	private String marka;
+	
+	private float cijena;
+	
+	private int garancija;
+	
+	
+
+}

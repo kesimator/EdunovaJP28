@@ -1,0 +1,19 @@
+package edunova;
+
+import java.util.Date;
+
+public class Grupa {
+	
+	private int sifra;
+	
+	private String naziv;
+	
+	private Smjer smjer;
+	
+	private Date datumPocetka;
+	
+	private int brojPolaznika;
+	
+	
+
+}

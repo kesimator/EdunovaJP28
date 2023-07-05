@@ -1,0 +1,45 @@
+package edunova;
+
+public class E02Start {
+	
+	private Osoba osoba;
+	
+	public static void main(String[] args) {
+		
+		
+		// Ovo znati u svako doba dana i noći:
+		// Objekt je instanca/pojavnost klase
+		// Prvo ide naziv klase - tip objekta
+		// Drugo ide naziv instance/objekta/varijable (u pravilu se piše malim slovima kao i ime klase)
+		// 3. nakon jednako poziv posebne metode (konstruktor)
+		
+		
+		Osoba osoba = new Osoba();
+		
+		// Ovo nije po OOP
+		/*osoba.ime="Pero";
+		osoba.prezime="Perić";
+		osoba.godine=24;
+		*/
+		
+		osoba.setIme("Pero");
+		osoba.setPrezime("Perić");
+		osoba.setGodine(24);
+		
+		Osoba[] osobe=new Osoba[5];
+		osobe[0]=osoba;
+		
+		osoba=new Osoba();
+		
+		osoba.setIme("Marija");
+		osoba.setPrezime("Zimska");
+		osoba.setGodine(21);
+		
+		osobe[1]=osoba;
+		
+		System.out.println(osobe[0].getPrezime() + " " +osoba.getPrezime());
+		
+		
+	}
+
+}

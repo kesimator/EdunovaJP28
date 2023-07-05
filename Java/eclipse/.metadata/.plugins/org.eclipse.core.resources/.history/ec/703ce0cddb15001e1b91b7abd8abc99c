@@ -1,0 +1,11 @@
+package edunova;
+
+public class E02KoristenjeMetoda {
+	
+	public static void main(String[] args) {
+		
+		E01Metode.tip1();
+		
+	}
+
+}

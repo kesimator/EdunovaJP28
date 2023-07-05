@@ -1,0 +1,23 @@
+package edunova;
+
+public class E03Rekurzija {
+	
+	public static void main(String[] args) {
+		
+		metoda();
+		
+	}
+
+	// Exception in thread "main" java.lang.StackOverflowError
+	private static void metoda() {
+		metoda();
+		
+	}
+	
+	// Rekurzija je kada metoda poziva samu sebe
+	// uz uvjet prekida rekurzije
+	int faktorijel(int broj) {
+		return broj*faktorijel(broj-1);
+	}
+
+}

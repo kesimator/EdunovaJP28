@@ -1,0 +1,10 @@
+INDEX VERSION 1.132+C:\Users\Polaznik\Documents\EdunovaJP28\Java\eclipse\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+119189159.index
+2003851816.index
+7826110.index
+2575186692.index
+1880989233.index
+2652110621.index
+4000910226.index
+3889121209.index

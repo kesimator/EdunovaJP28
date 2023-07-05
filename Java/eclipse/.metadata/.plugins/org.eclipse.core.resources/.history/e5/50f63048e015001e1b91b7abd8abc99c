@@ -1,0 +1,13 @@
+package edunova;
+
+public class E05TryCatch {
+	
+	public static void main(String[] args) {
+		
+		int[] niz= {1,2};
+		
+		System.out.println(niz[2]);
+		
+	}
+
+}
