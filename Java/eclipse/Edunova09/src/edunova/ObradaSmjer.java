@@ -10,9 +10,13 @@ public class ObradaSmjer {
 	private List<Smjer> smjerovi;
 	
 	
+	public List<Smjer> getSmjerovi() {
+		return smjerovi;
+	}
+
 	public ObradaSmjer() {
 		smjerovi=new ArrayList<>();
-		if(Pomocno.dev) {
+		if(Pomocno.DEV) {
 			testniPodaci();
 		}
 		
@@ -20,8 +24,8 @@ public class ObradaSmjer {
 	}
 	
 	private void testniPodaci() {
-		smjerovi.add(new Smjer(1,"Java progranmiranje",100,100,100,true));
-		smjerovi.add(new Smjer(2,"Web progranmiranje",100,100,100,true));
+		smjerovi.add(new Smjer(1,"Java programiranje",100,100,100,true));
+		smjerovi.add(new Smjer(2,"Web programiranje",100,100,100,true));
 		smjerovi.add(new Smjer(3,"Web dizajn",100,100,100,true));
 		
 	}
@@ -47,16 +51,46 @@ public class ObradaSmjer {
 			dodavanjeSmjera();
 			prikaziIzbornik();
 			break;
+		case 3:
+			promjenaSmjera();
+			prikaziIzbornik();
+			break;
+		case 4:
+			brisanjeSmjera();
+			prikaziIzbornik();
+			break;
 		case 5:
 			break;
 		}
 		
 	}
 
-	private void pregledSmjerova() {
+	private void brisanjeSmjera() {
+		pregledSmjerova();
+		int broj=Pomocno.unosRasponBroja("Odaberi redni broj smjera: ", "Greška", 1, smjerovi.size());
+		smjerovi.remove(broj-1);
+		
+	}
+
+	private void promjenaSmjera() {
+		pregledSmjerova();
+		int broj=Pomocno.unosRasponBroja("Odaberi redni broj smjera: ", "Greška", 1, smjerovi.size());
+		// smjerovi.get(broj-1).setSifra(22);
+		Smjer s=smjerovi.get(broj-1);
+		s.setSifra(Pomocno.unosRasponBroja("Unesi šifru smjera: (" + s.getSifra() + ") ", "Pozitivan broj",
+				1,Integer.MAX_VALUE));
+		s.setNaziv(Pomocno.unosString("Unesi naziv smjera: (" + s.getNaziv() + ")", "Naziv obavezan"));
+		
+		
+	}
+
+	public void pregledSmjerova() {
+		System.out.println("--------- Smjerovi u aplikaciji ----------");
+		int b=1;
 		for(Smjer s : smjerovi) {
-			System.out.println(s.getNaziv());
+			System.out.println(b++ + ". " +s.getNaziv());
 		}
+		System.out.println("------------------------------------------");
 		
 	}
 

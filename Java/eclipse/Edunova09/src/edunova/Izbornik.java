@@ -6,10 +6,26 @@ public class Izbornik {
 	
 	private ObradaSmjer obradaSmjer;
 	private ObradaPolaznik obradaPolaznik;
+	private ObradaGrupa obradaGrupa;
 	
+	
+	
+	public ObradaSmjer getObradaSmjer() {
+		return obradaSmjer;
+	}
+
+
+
+	public ObradaPolaznik getObradaPolaznik() {
+		return obradaPolaznik;
+	}
+
+
+
 	public Izbornik() {
 		obradaSmjer=new ObradaSmjer();
 		obradaPolaznik=new ObradaPolaznik();
+		obradaGrupa=new ObradaGrupa(this);
 		Pomocno.ulaz=new Scanner(System.in);
 		pozdravnaPoruka();
 		prikaziIzbornik();
@@ -53,7 +69,7 @@ public class Izbornik {
 			prikaziIzbornik();
 			break;
 		case 4:
-			System.out.println("Grupe");
+			obradaGrupa.prikaziIzbornik();
 			prikaziIzbornik();
 			break;
 		case 5:

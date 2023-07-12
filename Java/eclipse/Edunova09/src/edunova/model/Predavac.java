@@ -12,9 +12,9 @@ public class Predavac extends Osoba {
 		super();
 	}
 
-	public Predavac(int sifra, String ime, String prezime, String oib, String email, String iban) {
-		super(sifra, ime, prezime, oib, email);
-		this.iban = iban;
+	public Predavac(String ime, String prezime) {
+		super(ime, prezime);
+		
 	}
 
 	public String getIban() {
