@@ -5,6 +5,7 @@
 package edunova;
 
 import edunova.util.HibernateUtil;
+import edunova.util.PocetniInsert;
 
 /**
  *
@@ -14,7 +15,8 @@ public class Start {
 
     public static void main(String[] args) {
        
-        HibernateUtil.getSession();
+        // HibernateUtil.getSession();
+        new PocetniInsert();
         
         
     }
