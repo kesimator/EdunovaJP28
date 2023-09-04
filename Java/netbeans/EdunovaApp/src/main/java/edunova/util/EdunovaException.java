@@ -8,14 +8,21 @@ package edunova.util;
  *
  * @author Polaznik
  */
-public class Alati {
+public class EdunovaException extends Exception {
     
-    public static String getOib() {
-        try {
-            // https://stackoverflow.com/questions/8616781/how-to-get-a-web-pages-source-code-from-java
-            
-        }
-            
+    private String poruka;
+
+    public EdunovaException(String poruka) {
+        super(poruka);
+        this.poruka = poruka;
     }
+
+    public String getPoruka() {
+        return poruka;
+    }
+    
+    
+    
+    
     
 }

@@ -70,7 +70,8 @@ public class PocetniInsert {
             p=new Polaznik();
             p.setIme(faker.name().firstName());
             p.setPrezime(faker.name().lastName());
-            p.setOib(faker.idNumber().ssnValid());
+            //p.setOib(faker.idNumber().ssnValid());
+            p.setOib("25790157836");
             p.setBrojUgovora(faker.business().creditCardNumber());
             p.setEmail(faker.internet().emailAddress());
             
