@@ -4,8 +4,10 @@
  */
 package edunova.controller;
 
+import edunova.model.Grupa;
 import edunova.model.Smjer;
 import edunova.util.EdunovaException;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -13,6 +15,16 @@ import java.util.List;
  * @author Polaznik
  */
 public class ObradaSmjer extends Obrada<Smjer> {
+    
+    public ObradaSmjer() {
+        super();
+    }
+    
+    public ObradaSmjer(Smjer s) {
+        super(s);
+    }
+    
+    
 
     @Override
     public List<Smjer> read() {
@@ -24,16 +36,30 @@ public class ObradaSmjer extends Obrada<Smjer> {
     @Override
     protected void kontrolaUnos() throws EdunovaException {
         kontrolaNaziv();
+        kontrolaCijena();
+        // DZ: napisati kontrole za trajanje i upisninu
     }
 
     @Override
     protected void kontrolaPromjena() throws EdunovaException {
-        
+        kontrolaUnos();
     }
 
     @Override
     protected void kontrolaBrisanje() throws EdunovaException {
-        
+        if(!entitet.getGrupe().isEmpty()) {
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Smjer se ne moze obrisati jer ima grupe. (");
+            for(Grupa g : entitet.getGrupe()) {
+                sb.append(g.getNaziv());
+                sb.append(", ");
+            }
+            // DZ: Očistiti zadnji zarez
+            sb.append(")");
+            
+                throw new EdunovaException(sb.toString());
+                }
     }
 
     private void kontrolaNaziv() throws EdunovaException {
@@ -43,6 +69,19 @@ public class ObradaSmjer extends Obrada<Smjer> {
         if(entitet.getNaziv().isEmpty()) {
             throw new EdunovaException("Naziv smjera ne smije biti prazan!");
         }
+    }
+    
+    private void kontrolaCijena() throws EdunovaException {
+        
+        var c = entitet.getCijena();
+        if(c==null) {
+            return;
+        } 
+        
+        if(c.compareTo(BigDecimal.ZERO)<=0 || c.compareTo(new BigDecimal(10000))>0) {
+            throw new EdunovaException("Ako je cijena postavljena, mora biti veca od 0 i manja ili jednaka 10000.");
+        }
+        
     }
     
     
