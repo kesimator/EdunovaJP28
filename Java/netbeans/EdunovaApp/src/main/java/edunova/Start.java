@@ -51,19 +51,17 @@ public class Start {
 //        } catch (EdunovaException e) {
 //            e.printStackTrace();
 //        }
-        ObradaPolaznik op = new ObradaPolaznik();
-        Polaznik p = new Polaznik();
-        p.setIme("Pero");
-        p.setPrezime("Peric");
-        p.setOib("54469438172");
+        
 
-        op.setEntitet(p);
-
-        try {
-            op.create();
-        } catch (EdunovaException e) {
-            System.out.println(e.getPoruka());
-        }
+//        ObradaPolaznik op = new ObradaPolaznik();
+//        Polaznik p = op.readBySifra(18);
+//        op.setEntitet(p);
+//
+//        try {
+//            op.delete();
+//        } catch (EdunovaException e) {
+//            System.out.println(e.getPoruka());
+//        }
 
     }
 
@@ -86,5 +84,6 @@ public class Start {
         }
 
     }
+    
 
 }
