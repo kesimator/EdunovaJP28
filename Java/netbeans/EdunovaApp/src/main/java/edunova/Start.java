@@ -17,6 +17,8 @@ import edunova.model.Smjer;
 import edunova.util.EdunovaException;
 import edunova.util.HibernateUtil;
 import edunova.util.PocetniInsert;
+import edunova.view.Autorizacija;
+import edunova.view.SplashScreen;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,14 +32,16 @@ import org.hibernate.Session;
 public class Start {
 
     public static void main(String[] args) {
+        
+        new SplashScreen().setVisible(true);
 
         // HibernateUtil.getSession();
         
-        ObradaOperater oo=new ObradaOperater();
-        
-        Operater o=oo.autoriziraj("oper@edunova.hr", "lozinka");
-        
-        System.out.println(o==null ? "Neispravno!" : o.getIme());
+//        ObradaOperater oo=new ObradaOperater();
+//        
+//        Operater o=oo.autoriziraj("oper@edunova.hr", "lozinka");
+//        
+//        System.out.println(o==null ? "Neispravno!" : o.getIme());
        
         
         // System.out.println(hash);

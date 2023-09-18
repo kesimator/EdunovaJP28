@@ -4,11 +4,20 @@
  */
 package edunova.util;
 
+import edunova.model.Operater;
+
 /**
  *
  * @author Polaznik
  */
 public class Alati {
+    
+    public static final String NAZIV_APP="Edunova APP";
+    public static Operater OPERATER;
+    
+    public static String getOperater() {
+        return OPERATER.getIme() + " " + OPERATER.getPrezime() + " (" + OPERATER.getUloga() + ")";
+    }
     
     /**
      * Provjera valjanosti OIB broja
