@@ -36,12 +36,15 @@ public class ObradaSmjer extends Obrada<Smjer> {
     @Override
     protected void kontrolaUnos() throws EdunovaException {
         kontrolaNaziv();
+        nadopunaNaziva();
         kontrolaCijena();
         // DZ: napisati kontrole za trajanje i upisninu
     }
 
     @Override
     protected void kontrolaPromjena() throws EdunovaException {
+        kontrolaNaziv();
+        nadopunaNaziva();
         kontrolaUnos();
     }
 
@@ -53,7 +56,7 @@ public class ObradaSmjer extends Obrada<Smjer> {
             sb.append("Smjer se ne moze obrisati jer ima grupe. (");
             for(Grupa g : entitet.getGrupe()) {
                 sb.append(g.getNaziv());
-                sb.append(", ");
+                sb.append("\n");
             }
             // DZ: Očistiti zadnji zarez
             sb.append(")");
@@ -69,6 +72,21 @@ public class ObradaSmjer extends Obrada<Smjer> {
         if(entitet.getNaziv().isEmpty()) {
             throw new EdunovaException("Naziv smjera ne smije biti prazan!");
         }
+        
+        
+        
+        }
+    
+    private void nadopunaNaziva() {
+            List<Smjer> lista=session.createQuery("from Smjer s where s.naziv like :uvjet", Smjer.class)
+                .setParameter("uvjet", entitet.getNaziv() + "%")
+                .list();
+        
+        if(lista!=null && !lista.isEmpty()) {
+            entitet.setNaziv(entitet.getNaziv() + " (" + lista.size() + ")");
+        }
+        
+        
     }
     
     private void kontrolaCijena() throws EdunovaException {
