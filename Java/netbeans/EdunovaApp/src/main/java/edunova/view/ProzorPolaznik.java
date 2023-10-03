@@ -61,7 +61,7 @@ public class ProzorPolaznik extends javax.swing.JFrame implements EdunovaViewSuc
         btnTrazi = new javax.swing.JButton();
         lblVrstaRezultata = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lstPodaci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstPodaci.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -220,6 +220,7 @@ public class ProzorPolaznik extends javax.swing.JFrame implements EdunovaViewSuc
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtUvjetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUvjetKeyPressed
