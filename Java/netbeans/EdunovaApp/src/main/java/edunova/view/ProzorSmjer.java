@@ -21,8 +21,8 @@ import javax.swing.JOptionPane;
  *
  * @author Polaznik
  */
-public class ProzorSmjer extends javax.swing.JFrame {
-    
+public class ProzorSmjer extends javax.swing.JFrame implements EdunovaViewSucelje {
+
     private ObradaSmjer obrada;
     private DecimalFormat df;
 
@@ -33,17 +33,16 @@ public class ProzorSmjer extends javax.swing.JFrame {
         initComponents();
         obrada = new ObradaSmjer();
         // https://docs.oracle.com/javase/8/docs/api/java/text/DecimalFormat.html
-        DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.of("hr","HR"));
-        df=new DecimalFormat("###,##0.00", dfs);
-        
-        
+        // https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/text/DecimalFormat.html
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.of("hr", "HR"));
+        df = new DecimalFormat("###,##0.00", dfs);
+
         setTitle(Alati.NAZIV_APP + " | SMJEROVI");
         ucitaj();
     }
-    
-    
-    
-    private void ucitaj() {
+
+    @Override
+    public void ucitaj() {
         DefaultListModel<Smjer> m = new DefaultListModel<>();
         m.addAll(obrada.read());
         lstPodaci.setModel(m);
@@ -222,25 +221,23 @@ public class ProzorSmjer extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUpisninaKeyPressed
 
     private void lstPodaciValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstPodaciValueChanged
-        if(evt.getValueIsAdjusting()) {
+        if (evt.getValueIsAdjusting()) {
             return;
         }
-        
-        if(lstPodaci.getSelectedValue()==null) {
+
+        if (lstPodaci.getSelectedValue() == null) {
             return;
         }
-        
+
         obrada.setEntitet(lstPodaci.getSelectedValue());
-        
+
         popuniView();
-        
-        
+
+
     }//GEN-LAST:event_lstPodaciValueChanged
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        
-        
-        
+
         obrada.setEntitet(new Smjer());
         popuniModel();
         try {
@@ -249,111 +246,108 @@ public class ProzorSmjer extends javax.swing.JFrame {
         } catch (EdunovaException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
         }
-        
-        
+
+
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiActionPerformed
-        if(lstPodaci.getSelectedValue()==null) {
+        if (lstPodaci.getSelectedValue() == null) {
             return;
         }
-        
+
         var e = lstPodaci.getSelectedValue();
-        
-        if(JOptionPane.showConfirmDialog(getRootPane(), e.getNaziv(), "Sigurno obrisati?", 
-                JOptionPane.YES_NO_OPTION)!=JOptionPane.YES_OPTION) {
+
+        if (JOptionPane.showConfirmDialog(getRootPane(), e.getNaziv(), "Sigurno obrisati?",
+                JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
             return;
         }
-        
+
         obrada.setEntitet(e);
-        
+
         try {
             obrada.delete();
             ucitaj();
         } catch (EdunovaException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getPoruka());
         }
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_btnObrisiActionPerformed
 
     private void btnPromjenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjenaActionPerformed
-        if(lstPodaci.getSelectedValue()==null) {
+        if (lstPodaci.getSelectedValue() == null) {
             return;
         }
-        
+
         var e = lstPodaci.getSelectedValue();
-        
+
         obrada.setEntitet(e);
         popuniModel();
-        
+
         try {
             obrada.update();
             ucitaj();
-        } catch (Exception ex) {
+        } catch (EdunovaException ex) {
             JOptionPane.showMessageDialog(getRootPane(), ex.getMessage());
+            obrada.refresh();
         }
     }//GEN-LAST:event_btnPromjenaActionPerformed
 
-    private void popuniModel() {
+    @Override
+    public void popuniModel() {
         var e = obrada.getEntitet();
         e.setNaziv(txtNaziv.getText());
-        
-        
+
         try {
             e.setTrajanje(Integer.parseInt(txtTrajanje.getText()));
         } catch (Exception ex) {
             e.setTrajanje(0);
         }
-        
+
         try {
             e.setCijena(BigDecimal.valueOf(df.parse(txtCijena.getText()).doubleValue()));
         } catch (Exception ex) {
             e.setCijena(null);
         }
-        
+
         try {
             e.setUpisnina(BigDecimal.valueOf(df.parse(txtCijena.getText()).doubleValue()));
         } catch (Exception ex) {
             e.setUpisnina(BigDecimal.ZERO);
         }
-        
+
         e.setVerificiran(chkVerificiran.isSelected());
-        
-        
+
     }
-    
-    
-    private void popuniView() {
+
+    @Override
+    public void popuniView() {
         var e = obrada.getEntitet();
-        
+
         txtNaziv.setText(e.getNaziv());
-        
+
         try {
             txtTrajanje.setText(String.valueOf(e.getTrajanje()));
         } catch (Exception ex) {
             txtTrajanje.setText("");
         }
-        
+
         try {
             txtCijena.setText(df.format(e.getCijena()));
         } catch (Exception ex) {
             txtCijena.setText(df.format(0));
         }
-        
+
         try {
             txtUpisnina.setText(df.format(e.getUpisnina()));
         } catch (Exception ex) {
             txtUpisnina.setText(df.format(0));
         }
-        
-        chkVerificiran.setSelected(e.isVerificiran());
-        
-        
+
+        chkVerificiran.setSelected(e.getVerificiran());
+
     }
-   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
@@ -372,5 +366,4 @@ public class ProzorSmjer extends javax.swing.JFrame {
     private javax.swing.JTextField txtUpisnina;
     // End of variables declaration//GEN-END:variables
 
-    
 }

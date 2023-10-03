@@ -21,26 +21,25 @@ public class SplashScreen extends javax.swing.JFrame {
         initComponents();
         ucitaj();
     }
-    
+
     private void ucitaj() {
         new Ucitanje().start();
     }
-    
+
     private class Ucitanje extends Thread {
 
         @Override
         public void run() {
             Session s = HibernateUtil.getSession();
-            if(s.getMetamodel().getEntities().isEmpty()) {
+            if (s.getMetamodel().getEntities().isEmpty()) {
                 JOptionPane.showMessageDialog(getRootPane(), "Problem u radu s bazom");
                 return;
             }
-            
+
             new Autorizacija().setVisible(true);
             dispose();
         }
-        
-        
+
     }
 
     /**
@@ -75,7 +74,6 @@ public class SplashScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

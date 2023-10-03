@@ -22,12 +22,13 @@ public class Polaznik extends Osoba {
         this.grupe = grupe;
     }
 
-    public Polaznik(String ime, String prezime) {
-        super(ime, prezime);
-    }
-
     public Polaznik() {
         super();
+    }
+
+    public Polaznik(int sifra, String ime, String prezime, String oib, String email, String brojUgovora) {
+        super(sifra, ime, prezime, oib, email);
+        this.brojUgovora = brojUgovora;
     }
 
     public String getBrojUgovora() {
@@ -36,6 +37,24 @@ public class Polaznik extends Osoba {
 
     public void setBrojUgovora(String brojUgovora) {
         this.brojUgovora = brojUgovora;
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(getPrezime());
+        sb.append(" ");
+        sb.append(getIme());
+
+        if (getOib() != null) {
+            sb.append(" [");
+            sb.append(getOib());
+            sb.append("]");
+        }
+
+        return sb.toString();
+
     }
 
 }

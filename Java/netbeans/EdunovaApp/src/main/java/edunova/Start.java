@@ -3,27 +3,32 @@
  */
 package edunova;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
-import edunova.controller.Obrada;
+import edunova.controller.ObradaGrupa;
 import edunova.controller.ObradaOperater;
 import edunova.controller.ObradaPolaznik;
 import edunova.controller.ObradaSmjer;
+import edunova.model.Grupa;
 import edunova.model.Operater;
 import edunova.model.Polaznik;
+import edunova.model.Predavac;
 import edunova.model.Smjer;
 import edunova.util.EdunovaException;
 import edunova.util.HibernateUtil;
 import edunova.util.PocetniInsert;
 import edunova.view.Autorizacija;
 import edunova.view.SplashScreen;
-import java.math.BigDecimal;
+import java.io.File;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.hibernate.Session;
 
 /**
  *
@@ -32,57 +37,111 @@ import org.hibernate.Session;
 public class Start {
 
     public static void main(String[] args) {
-        
+
+        //lozinka();
         new SplashScreen().setVisible(true);
-
-        // HibernateUtil.getSession();
-        
-//        ObradaOperater oo=new ObradaOperater();
-//        
-//        Operater o=oo.autoriziraj("oper@edunova.hr", "lozinka");
-//        
-//        System.out.println(o==null ? "Neispravno!" : o.getIme());
+        //  new Start();
+        /*
+       ObradaOperater oo = new ObradaOperater();
        
-        
-        // System.out.println(hash);
-        
+       Operater o = oo.autoriziraj("oper@edunova.hr", "oper");
        
-        
-        
-        // new PocetniInsert();
-        // System.out.println(new Gson().toJson(new ObradaSmjer().read()));
-//        ObradaSmjer os = new ObradaSmjer();
-//        Smjer s = new Smjer();
-//        s.setNaziv("Prvi iz koda");
-//        s.setCijena(new BigDecimal(1568));
-//        os.setEntitet(s);
-//        try {
-//            os.create();
-//        } catch (EdunovaException e) {
-//            System.out.println(e.getPoruka());
-//        }
-//           List<Smjer> smjerovi = new ObradaSmjer().read();
-//
-//           Smjer zadnjiSmjer = smjerovi.get(0);
-//           
-//           ObradaSmjer os = new ObradaSmjer(zadnjiSmjer);
-//           
-//           try {
-//            os.delete();
-//        } catch (EdunovaException e) {
-//            e.printStackTrace();
-//        }
-        
+        System.out.println(o==null ? "Neispravno" : o.getIme());
+         */
+    }
 
-//        ObradaPolaznik op = new ObradaPolaznik();
-//        Polaznik p = op.readBySifra(18);
-//        op.setEntitet(p);
-//
-//        try {
-//            op.delete();
-//        } catch (EdunovaException e) {
-//            System.out.println(e.getPoruka());
-//        }
+    public Start() {
+        //radSJSON();
+        ucitajIzJSON();
+    }
+
+    private static void lozinka() {
+        // factory pattern
+        Argon2 argon2 = Argon2Factory.create();
+
+        String hash = argon2.hash(10, 65536, 1, "lozinka".toCharArray());
+
+        ObradaOperater oo = new ObradaOperater();
+        Operater o = new Operater();
+        o.setIme("Pero");
+        o.setPrezime("Perić");
+        o.setEmail("oper@edunova.hr");
+        o.setUloga("oper");
+        o.setOib("81425134722");
+        o.setLozinka(hash);
+
+        oo.setEntitet(o);
+
+        try {
+            oo.create();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void radSJSON() {
+
+        Type listType = new TypeToken<List<Grupa>>() {
+        }.getType();
+        List<Grupa> target = new ObradaGrupa().read();
+
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                .setExclusionStrategies(new CustomExclusionStrategy()).create();
+        String json = gson.toJson(target, listType);
+
+        System.out.println(json);
+
+    }
+
+    void ucitajIzJSON() {
+        try {
+
+            //Nov 28, 2018, 7:09:02?AM
+            Type listType = new TypeToken<List<Grupa>>() {
+            }.getType();
+            Gson gson = new GsonBuilder()
+                    .setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+            List<Grupa> list = gson.fromJson(Files.readString(Path.of("podaci.json")), listType);
+
+            ObradaGrupa og = new ObradaGrupa();
+            for (Grupa g : list) {
+                g.setSifra(null);
+                og.setEntitet(g);
+                try {
+                    og.create();
+                } catch (EdunovaException e) {
+                    System.out.println(e.getPoruka());
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public class CustomExclusionStrategy implements ExclusionStrategy {
+
+        public boolean shouldSkipField(FieldAttributes f) {
+
+            if (f.getDeclaringClass() == Smjer.class && f.getName().equals("grupe")) {
+                return true;
+            }
+
+            if (f.getDeclaringClass() == Polaznik.class && f.getName().equals("grupe")) {
+                return true;
+            }
+
+            if (f.getDeclaringClass() == Predavac.class && f.getName().equals("grupe")) {
+                return true;
+            }
+
+            return false;
+        }
+
+        public boolean shouldSkipClass(Class<?> clazz) {
+            return false;
+        }
 
     }
 
@@ -103,32 +162,5 @@ public class Start {
                 System.out.println(ex.getPoruka());
             }
         }
-
     }
-    
-    
-     private void lozinka() {
-             // factory pattern
-        Argon2 argon2 = Argon2Factory.create();
-        
-        String hash=argon2.hash(10, 65536, 1, "lozinka".toCharArray());
-        
-        ObradaOperater oo=new ObradaOperater();
-        Operater o= new Operater();
-        o.setIme("Pero");
-        o.setPrezime("Perić");
-        o.setEmail("oper@edunova.hr");
-        o.setUloga("oper");
-        o.setOib("68948021705");
-        o.setLozinka(hash);
-        
-        oo.setEntitet(o);
-        
-        try {
-            oo.create();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        }
-
 }

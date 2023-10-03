@@ -6,83 +6,31 @@ import jakarta.persistence.OneToMany;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Smjer extends Entitet {
-	
-                  
-                  @Column(nullable = false)
-	private String naziv;
-	private BigDecimal cijena;
-	private BigDecimal upisnina;
-	private Integer trajanje;
-                  @Column(columnDefinition = "boolean")
-	private Boolean verificiran;
-                  
-                  @OneToMany(mappedBy = "smjer")
-                  private List<Grupa> grupe = new ArrayList<>();
-	
-	
-	
-	public Smjer() {
-		super();
-	}
-        
-        
-        
-	public Smjer(Integer sifra, String naziv, BigDecimal cijena, BigDecimal upisnina, Integer trajanje, boolean verificiran) {
-		super(sifra);
-		this.naziv = naziv;
-		this.cijena = cijena;
-		this.upisnina = upisnina;
-		this.trajanje = trajanje;
-		this.verificiran = verificiran;
-	}
-	public String getNaziv() {
-		return naziv;
-	}
-	public void setNaziv(String naziv) {
-		this.naziv = naziv;
-	}
-	public BigDecimal getCijena() {
-		return cijena;
-	}
-	public void setCijena(BigDecimal cijena) {
-		this.cijena = cijena;
-	}
-	public BigDecimal getUpisnina() {
-		return upisnina;
-	}
-	public void setUpisnina(BigDecimal upisnina) {
-		this.upisnina = upisnina;
-	}
-	public int getTrajanje() {
-		return trajanje;
-	}
-	
-                    public List<Grupa> getGrupe() {
-                        return grupe;
-                    }
 
-                    public void setGrupe(List<Grupa> grupe) {
-                        this.grupe = grupe;
-                    }
-                public void setTrajanje(Integer trajanje) {
-                                this.trajanje = trajanje;
-                        }
-                        public Boolean isVerificiran() {
-                                return verificiran;
-                        }
-                        public void setVerificiran(Boolean verificiran) {
-                                this.verificiran = verificiran;
-                        }
-                        
-                        @Override
-                        public String toString() {
-                            return naziv;
-                        }
-        
-        
+    @Column(nullable = false)
+    private String naziv;
+    private BigDecimal cijena;
+    private BigDecimal upisnina;
+    private Integer trajanje;
+    @Column(columnDefinition = "boolean")
+    private Boolean verificiran;
+    @OneToMany(mappedBy = "smjer")
+    private List<Grupa> grupe = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return naziv;
+    }
 
 }

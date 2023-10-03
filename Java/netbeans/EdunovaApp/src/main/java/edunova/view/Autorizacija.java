@@ -18,7 +18,7 @@ import org.apache.commons.validator.routines.EmailValidator;
  * @author Polaznik
  */
 public class Autorizacija extends javax.swing.JFrame {
-    
+
     private ObradaOperater obrada;
 
     /**
@@ -27,12 +27,11 @@ public class Autorizacija extends javax.swing.JFrame {
     public Autorizacija() {
         initComponents();
         // Sav naš kod nakon poziva metode initComponents();
-        
-        obrada=new ObradaOperater();
-        
+
+        obrada = new ObradaOperater();
+
         setTitle(Alati.NAZIV_APP);
-        
-        
+
     }
 
     /**
@@ -116,66 +115,65 @@ public class Autorizacija extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAutorizirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutorizirajActionPerformed
-        
+
         reset();
-        
-        var email=txtEmail.getText().trim();
-        
-        if(email.isEmpty()) {
+
+        var email = txtEmail.getText().trim();
+
+        if (email.isEmpty()) {
             lblEmailPoruka.setText("Email obavezan!");
             postaviGresku(txtEmail);
             return;
         }
-        
-        if(!EmailValidator.getInstance().isValid(email)) {
+
+        if (!EmailValidator.getInstance().isValid(email)) {
             lblEmailPoruka.setText("Upisani tekst nije email!");
             postaviGresku(txtEmail);
             return;
         }
-        
-        if(txtLozinka.getPassword().length==0) {
+
+        if (txtLozinka.getPassword().length == 0) {
             postaviGresku(txtLozinka);
             return;
         }
-        
+
         // Tu sam spreman ići provjeravati
         Operater o = obrada.autoriziraj(txtEmail.getText(), new String(txtLozinka.getPassword()));
-        
-        if(o==null) {
+
+        if (o == null) {
             JOptionPane.showMessageDialog(getRootPane(), "Neispravna kombinacija email i/ili lozinka");
             return;
         }
-        
+
         //Ja sam siguran da si logiran i idemo dalje
         Operater logiran = new Operater();
         logiran.setIme(o.getIme());
         logiran.setPrezime(o.getPrezime());
         logiran.setUloga(o.getUloga());
-        
-        Alati.OPERATER=logiran;
-        
-        
+
+        Alati.OPERATER = logiran;
+
         new Izbornik().setVisible(true);
         dispose();
-        
+
     }//GEN-LAST:event_btnAutorizirajActionPerformed
 
     private void txtEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyPressed
-        if(txtEmail.getText().length()>0) {
+        if (txtEmail.getText().length() > 0) {
             txtEmail.setBackground(Color.WHITE);
         }
-        
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnAutorizirajActionPerformed(null);
         }
     }//GEN-LAST:event_txtEmailKeyPressed
 
     private void txtLozinkaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLozinkaKeyPressed
-        if(txtLozinka.getPassword().length>0) {
+        if (txtLozinka.getPassword().length > 0) {
             txtLozinka.setBackground(Color.WHITE);
         }
-        
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnAutorizirajActionPerformed(null);
         }
     }//GEN-LAST:event_txtLozinkaKeyPressed
@@ -184,18 +182,11 @@ public class Autorizacija extends javax.swing.JFrame {
         c.setBackground(Color.RED);
         c.requestFocus();
     }
-    
+
     private void reset() {
         lblEmailPoruka.setText("");
         txtEmail.setBackground(Color.WHITE);
         txtLozinka.setBackground(Color.WHITE);
-    }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

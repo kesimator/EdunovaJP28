@@ -19,12 +19,12 @@ import org.hibernate.Session;
  * @author Polaznik
  */
 public class PocetniInsert {
-    
-    private static final int BROJ_SMJEROVA=12;
-    private static final int BROJ_POLAZNIKA=11256;
-    private static final int BROJ_PREDAVACA=7;
-    private static final int BROJ_GRUPA=220;
-    
+
+    private static final int BROJ_SMJEROVA = 12;
+    private static final int BROJ_POLAZNIKA = 11256;
+    private static final int BROJ_PREDAVACA = 7;
+    private static final int BROJ_GRUPA = 220;
+
     private Faker faker;
     private Session session;
     private List<Smjer> smjerovi;
@@ -32,7 +32,7 @@ public class PocetniInsert {
     private List<Predavac> predavaci;
 
     public PocetniInsert() {
-        
+
         faker = new Faker();
         session = HibernateUtil.getSession();
         smjerovi = new ArrayList<>();
@@ -43,15 +43,14 @@ public class PocetniInsert {
         kreirajPolaznike();
         kreirajPredavace();
         kreirajGrupe();
-        
-        
+
         session.getTransaction().commit();
     }
 
     private void kreirajSmjerove() {
         Smjer s;
-        for(int i=0;i<BROJ_SMJEROVA;i++) {
-            s=new Smjer();
+        for (int i = 0; i < BROJ_SMJEROVA; i++) {
+            s = new Smjer();
             s.setNaziv(faker.beer().name());
             s.setCijena(new BigDecimal(faker.number().numberBetween(910, 1560)));
             s.setUpisnina(new BigDecimal(faker.number().numberBetween(50, 120)));
@@ -59,68 +58,67 @@ public class PocetniInsert {
             s.setVerificiran(faker.bool().bool());
             session.persist(s);
             smjerovi.add(s);
-            
+
         }
     }
 
     private void kreirajPolaznike() {
-        
+
         Polaznik p;
-        for(int i=0;i<BROJ_POLAZNIKA;i++) {
-            p=new Polaznik();
+        for (int i = 0; i < BROJ_POLAZNIKA; i++) {
+            p = new Polaznik();
             p.setIme(faker.name().firstName());
             p.setPrezime(faker.name().lastName());
             //p.setOib(faker.idNumber().ssnValid());
-            p.setOib("25790157836");
+            //p.setOib(Alati.getOib());
+            p.setOib("");
             p.setBrojUgovora(faker.business().creditCardNumber());
             p.setEmail(faker.internet().emailAddress());
-            
+
             session.persist(p);
             polaznici.add(p);
         }
     }
 
     private void kreirajPredavace() {
-      Predavac p;
-        for(int i=0;i<BROJ_PREDAVACA;i++) {
-            p=new Predavac();
+        Predavac p;
+        for (int i = 0; i < BROJ_PREDAVACA; i++) {
+            p = new Predavac();
             p.setIme(faker.name().firstName());
             p.setPrezime(faker.name().lastName());
-            p.setOib(faker.idNumber().ssnValid());
+            p.setOib(Alati.getOib());
             p.setIban(faker.business().creditCardNumber());
             p.setEmail(faker.internet().emailAddress());
-            
+
             session.persist(p);
             predavaci.add(p);
         }
     }
 
     private void kreirajGrupe() {
-       Grupa g;
-       List<Polaznik> p;
-       for(int i=0;i<BROJ_GRUPA;i++) {
-           g=new Grupa();
-           g.setNaziv(faker.chuckNorris().fact());
-           g.setDatumPocetka(faker.date().birthday(1, 10));
-           g.setPredavac(predavaci.get(faker.number().numberBetween(0, BROJ_PREDAVACA-1)));
-           g.setSmjer(smjerovi.get(faker.number().numberBetween(0, BROJ_SMJEROVA-1)));
-           g.setMaxPolaznika(faker.number().numberBetween(5, 30));
-           p=new ArrayList<>();
-           for(int j=0;j<faker.number().numberBetween(5, g.getMaxPolaznika());j++) {
-               p.add(polaznici.get(faker.number().numberBetween(0, BROJ_POLAZNIKA-1)));
-           }
-           g.setPolaznici(p);
-           
-           session.persist(g);
-           
-       }
+        Grupa g;
+        List<Polaznik> p;
+        for (int i = 0; i < BROJ_GRUPA; i++) {
+            g = new Grupa();
+            g.setNaziv(faker.chuckNorris().fact());
+            g.setDatumPocetka(faker.date().birthday(1, 10));
+            g.setPredavac(predavaci.get(faker.number().numberBetween(0, BROJ_PREDAVACA - 1)));
+            g.setSmjer(smjerovi.get(faker.number().numberBetween(0, BROJ_SMJEROVA - 1)));
+            g.setMaxPolaznika(faker.number().numberBetween(5, 30));
+            p = new ArrayList<>();
+            for (int j = 0; j < faker.number().numberBetween(5, g.getMaxPolaznika()); j++) {
+                p.add(polaznici.get(faker.number().numberBetween(0, BROJ_POLAZNIKA - 1)));
+            }
+            g.setPolaznici(p);
+
+            session.persist(g);
+
+        }
     }
-    
-    
+
     /*
     
     /html/body/div[1]/div[1]/text()
     
-    */
-    
+     */
 }

@@ -21,7 +21,7 @@ public class ObradaPredavac extends ObradaOsoba<Predavac> {
 
     @Override
     protected void kontrolaBrisanje() throws EdunovaException {
-        if(!entitet.getGrupe().isEmpty()) {
+        if (!entitet.getGrupe().isEmpty()) {
             throw new EdunovaException("Ne možeš obrisati predavača jer predaje na nekoj grupi!");
         }
     }

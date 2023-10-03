@@ -6,6 +6,7 @@ package edunova.controller;
 
 import edunova.model.Polaznik;
 import edunova.util.EdunovaException;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -17,16 +18,16 @@ public class ObradaPolaznik extends ObradaOsoba<Polaznik> {
     @Override
     public List<Polaznik> read() {
         return session.createQuery("from Polaznik", Polaznik.class).list();
-        
+
     }
-    
+
     public Polaznik readBySifra(int sifra) {
         return session.get(Polaznik.class, sifra);
     }
-    
+
     @Override
     protected void kontrolaBrisanje() throws EdunovaException {
-        if(!entitet.getGrupe().isEmpty()) {
+        if (!entitet.getGrupe().isEmpty()) {
             throw new EdunovaException("Ne možeš obrisati polaznika jer je na nekoj grupi!");
         }
     }
@@ -39,16 +40,13 @@ public class ObradaPolaznik extends ObradaOsoba<Polaznik> {
 
     private void kontrolaBrojUgovora() throws EdunovaException {
         // Napisati kontrolu da broj ugovora u sebi mora sadržavati znak /
-        if(entitet.getBrojUgovora()==null || !entitet.getBrojUgovora().contains("/")) {
+        if (entitet.getBrojUgovora() == null || !entitet.getBrojUgovora().contains("/")) {
             throw new EdunovaException("Broj ugovora mora sadržavati znak '/'");
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
+    public Collection<? extends Polaznik> read(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
