@@ -72,4 +72,29 @@ public class Grupa extends Entitet {
         this.polaznici = polaznici;
     }
 
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+
+        if (getNaziv() == null) {
+            sb.append("Grupa bez naziva, ");
+
+            sb.append(String.valueOf(getSifra()));
+        } else if (getNaziv().length() > 10) {
+            sb.append(getNaziv().substring(0, 10));
+            sb.append("...");
+        } else {
+            sb.append(getNaziv());
+        }
+
+        if (getSmjer() != null && getSmjer().getNaziv() != null && !getSmjer().getNaziv().isEmpty()) {
+            sb.append(" [");
+            sb.append(getSmjer().getNaziv());
+            sb.append("]");
+        }
+
+        return sb.toString();
+    }
+
 }

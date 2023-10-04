@@ -24,7 +24,7 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T> {
 
     }
 
-    private void kontrolaOib() throws EdunovaException {
+    protected void kontrolaOib() throws EdunovaException {
         // DZ: napraviti kontrolu OIB-a https://regos.hr/app/uploads/2018/07/KONTROLA-OIB-a.pdf
         if (!Alati.isValjanOIB(entitet.getOib())) {
             throw new EdunovaException("OIB nije valjan!");
