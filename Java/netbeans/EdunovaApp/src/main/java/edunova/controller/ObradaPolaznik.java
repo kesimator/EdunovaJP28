@@ -23,15 +23,22 @@ public class ObradaPolaznik extends ObradaOsoba<Polaznik> {
     }
 
     public List<Polaznik> read(String uvjet) {
+        return read(uvjet, 20);
+    }
+
+    public List<Polaznik> read(String uvjet, int brojRezultata) {
         uvjet = uvjet == null ? "" : uvjet;
         uvjet = uvjet.trim();
         uvjet = "%" + uvjet + "%";
-        return session.createQuery("from Polaznik p "
+
+        List<Polaznik> lista = session.createQuery("from Polaznik p "
                 + " where concat(p.ime,' ', p.prezime,' ',p.ime,' ',coalesce(p.oib,'')) like :uvjet"
                 + " order by p.prezime, p.ime", Polaznik.class)
                 .setParameter("uvjet", uvjet)
-                .setMaxResults(20)
+                .setMaxResults(brojRezultata)
                 .list();
+
+        return lista;
     }
 
     public Polaznik readBySifra(int sifra) {
