@@ -4,11 +4,20 @@
  */
 package edunova.view;
 
+import edunova.controller.ObradaGrupa;
+import edunova.controller.ObradaSmjer;
+import edunova.model.Grupa;
+import edunova.model.Smjer;
 import edunova.util.Alati;
+import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -23,6 +32,28 @@ public class Izbornik extends javax.swing.JFrame {
         initComponents();
         setTitle(Alati.NAZIV_APP + " | IZBORNIK");
         lblOperater.setText(Alati.getOperater());
+        definirajGraf();
+    }
+
+    private void definirajGraf() {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+
+        int ukupno;
+        for (Smjer s : new ObradaSmjer().read()) {
+            ukupno = 0;
+            for (Grupa g : s.getGrupe()) {
+                ukupno += g.getPolaznici().size();
+            }
+            dataset.setValue(s.getNaziv() + ": " + ukupno, ukupno);
+        }
+
+        JFreeChart chart = ChartFactory.createPieChart("Broj polaznika po grupama", dataset, false, false, false);
+
+        ChartPanel cp = new ChartPanel(chart);
+
+        pnlGraf.setLayout(new BorderLayout());
+        pnlGraf.add(cp, BorderLayout.CENTER);
+        pnlGraf.validate();
     }
 
     /**
@@ -36,6 +67,7 @@ public class Izbornik extends javax.swing.JFrame {
 
         jToolBar1 = new javax.swing.JToolBar();
         lblOperater = new javax.swing.JLabel();
+        pnlGraf = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -50,6 +82,17 @@ public class Izbornik extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
         jToolBar1.add(lblOperater);
+
+        javax.swing.GroupLayout pnlGrafLayout = new javax.swing.GroupLayout(pnlGraf);
+        pnlGraf.setLayout(pnlGrafLayout);
+        pnlGrafLayout.setHorizontalGroup(
+            pnlGrafLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnlGrafLayout.setVerticalGroup(
+            pnlGrafLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 266, Short.MAX_VALUE)
+        );
 
         jMenu1.setText("Programi");
 
@@ -114,11 +157,13 @@ public class Izbornik extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(pnlGraf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(246, Short.MAX_VALUE)
+                .addComponent(pnlGraf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -153,7 +198,7 @@ public class Izbornik extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-       new ProzorGrupa().setVisible(true);
+        new ProzorGrupa().setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
 
@@ -169,5 +214,6 @@ public class Izbornik extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblOperater;
+    private javax.swing.JPanel pnlGraf;
     // End of variables declaration//GEN-END:variables
 }
