@@ -1,7 +1,0 @@
-package edunova.model;
-
-public class Smjer extends Entitet {
-	
-	
-
-}

@@ -1,7 +1,0 @@
-package edunova;
-
-public class Polaznik extends Osoba {
-	
-	
-
-}
