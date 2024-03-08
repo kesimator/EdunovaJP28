@@ -13,7 +13,7 @@ import com.github.javafaker.Faker;
 public class Start {
 
     public static void main(String[] args) {
-        //  new Prozor().setVisible(true);
+          new Prozor().setVisible(true);
         
         // new LjubavniKalkulator().setVisible(true);
         

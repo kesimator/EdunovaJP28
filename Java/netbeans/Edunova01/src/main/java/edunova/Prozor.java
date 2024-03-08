@@ -54,9 +54,10 @@ public class Prozor extends javax.swing.JFrame {
             }
         });
 
+        lblPoruka.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         lblPoruka.setForeground(new java.awt.Color(204, 0, 0));
         lblPoruka.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblPoruka.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(204, 0, 0))); // NOI18N
+        lblPoruka.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(204, 0, 0))); // NOI18N
 
         jLabel1.setText("Unesi ime");
 
@@ -78,7 +79,7 @@ public class Prozor extends javax.swing.JFrame {
                         .addGap(57, 57, 57))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPoruka, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPoruka, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
